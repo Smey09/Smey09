@@ -1,5 +1,10 @@
+<h1 align="center">
+  <img src="https://github.com/rudrabarad/Gifs/assets/149933218/e826bffd-03ed-4220-a200-74fc726696f0" alt="Roem reaksmey" />
+</h1>
+
 <h1 align="center">Hi 👋, I'm Smey</h1>
 <h3 align="center">A am a software development student at Norton University in Cambodia</h3>
+<img align="right" alt="GIF" src="https://github.com/abhisheknaiidu/abhisheknaiidu/blob/master/code.gif?raw=true" width="500" height="320" />
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=smey09&label=Profile%20views&color=0e75b6&style=flat" alt="smey09" /> </p>
 

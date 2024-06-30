@@ -15,7 +15,8 @@ convert this code to readme in github : <h1 align="center">Hi 👋, I'm Smey</h1
 </div>
 <img align="right" src="https://github.com/rajaprerak/rajaprerak/blob/master/developer.gif" alt="Coder GIF" width="420" height="330">
 </div>
-<table>
+<div>
+  <table>
   <tr>
     <td><img src="https://github-readme-stats.vercel.app/api/top-langs?username=smey09&show_icons=true&locale=en&layout=compact" alt="smey09" /></td>
   </tr>
@@ -26,4 +27,6 @@ convert this code to readme in github : <h1 align="center">Hi 👋, I'm Smey</h1
     <td><img src="https://github-readme-streak-stats.herokuapp.com/?user=smey09&" alt="smey09" /></td>
   </tr>
 </table>
+</div>
+
 

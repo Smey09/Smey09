@@ -14,9 +14,7 @@ convert this code to readme in github : <h1 align="center">Hi 👋, I'm Smey</h1
 </a>
 </div>
 <img align="right" src="https://github.com/rajaprerak/rajaprerak/blob/master/developer.gif" alt="Coder GIF" width="420" height="330">
-</div>
-<div>
-  <table>
+    <table>
   <tr>
     <td><img src="https://github-readme-stats.vercel.app/api/top-langs?username=smey09&show_icons=true&locale=en&layout=compact" alt="smey09" /></td>
   </tr>

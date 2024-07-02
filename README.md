@@ -1,6 +1,7 @@
-<h1 align="center">Hi 👋, I'm Smey</h1>
-<h3 align="left">Connect with me:</h3>
-<div align="left">
+# Hi 👋, I'm Smey
+
+## Connect with me:
+<div>
   <a href="mailto:roemreaksmey7@gmail.com" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="gmail logo" />
   </a>
@@ -15,15 +16,8 @@
   </a>
 </div>
 
-<table style="width: 100%;">
-  <tr>
-    <td style="width: 50%;"><img src="https://github-readme-stats.vercel.app/api/top-langs?username=smey09&show_icons=true&locale=en&layout=compact" alt="smey09" style="width: 100%;" /></td>
-    <td style="width: 50%;"><img src="https://github.com/rajaprerak/rajaprerak/blob/master/developer.gif" alt="Coder GIF" style="width: 100%;" /></td>
-  </tr>
-  <tr>
-    <td colspan="2"><img src="https://github-readme-stats.vercel.app/api?username=smey09&show_icons=true&locale=en" alt="smey09" style="width: 100%;" /></td>
-  </tr>
-  <tr>
-    <td colspan="2"><img src="https://github-readme-streak-stats.herokuapp.com/?user=smey09&" alt="smey09" style="width: 100%;" /></td>
-  </tr>
-</table>
+---
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=smey09&layout=compact&show_icons=true&locale=en)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=smey09&show_icons=true&locale=en)
+![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=smey09)

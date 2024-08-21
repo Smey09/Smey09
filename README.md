@@ -16,16 +16,10 @@
   </a>
 </div>
 
-## Skills:
-<div>
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" height="35" alt="Flutter logo" />
-  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white" height="35" alt="React logo" />
-  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" height="35" alt="Next.js logo" />
-  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" height="35" alt="Figma logo" />
-</div>
-
 ---
 
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=smey09&layout=compact&show_icons=true&locale=en&langs_count=10)
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=smey09&show_icons=true&locale=en)
 ![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=smey09)
+
+---

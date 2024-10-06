@@ -14,6 +14,7 @@
   <a href="https://smey09.github.io/roemreaksmey.github.io/?fbclid=IwAR0QN--YdGpFwFAJlGLzFakta0yJpNKvjfcUXNPdLTvpzgYr2meBe6F0zuY" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Visit%20Site&logo=github&label=&color=blue&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="Visit Site" />
   </a>
+  <img alt="Profile view count" width="20%" src="https://komarev.com/ghpvc/?username=smey09&color=1877F2&style=for-the-badge" />
 </div>
 
 ---

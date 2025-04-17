@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore My Repositories by Language</title>
+    <!-- Add Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Explore My Repositories by Language</h2>
-    <div id="languages-list"></div>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- Container for the page content -->
+    <div class="max-w-4xl mx-auto px-4 py-8">
+
+        <!-- Title Section -->
+        <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">Explore My Repositories by Language</h2>
+
+        <!-- List of repositories categorized by language -->
+        <div id="languages-list" class="space-y-8"></div>
+
+    </div>
 
     <script>
         // GitHub API URL for fetching public repositories of a user
@@ -32,17 +43,24 @@
                 // Now build the dynamic list of repositories by language
                 const languagesListDiv = document.getElementById('languages-list');
                 for (let language in languages) {
-                    const repoList = languages[language].map(repo => `<li><a href="https://github.com/smey09/${repo}" target="_blank">${repo}</a></li>`).join('');
+                    const repoList = languages[language].map(repo => `
+                        <li class="flex justify-between items-center py-2 px-4 border-b border-gray-200">
+                            <a href="https://github.com/smey09/${repo}" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold">${repo}</a>
+                        </li>
+                    `).join('');
                     languagesListDiv.innerHTML += `
-                        <h3>${language}</h3>
-                        <ul>${repoList}</ul>
+                        <div class="bg-white shadow rounded-lg p-6">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">${language}</h3>
+                            <ul class="space-y-2">${repoList}</ul>
+                        </div>
                     `;
                 }
             })
             .catch(error => {
                 console.error('Error fetching data from GitHub API:', error);
-                document.getElementById('languages-list').innerHTML = 'Failed to load repositories.';
+                document.getElementById('languages-list').innerHTML = '<p class="text-red-600">Failed to load repositories.</p>';
             });
     </script>
+
 </body>
 </html>

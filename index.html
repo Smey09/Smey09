@@ -6,6 +6,8 @@
     <title>Explore My Repositories by Language</title>
     <!-- Add Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add Font Awesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
 
@@ -48,9 +50,52 @@
                             <a href="https://github.com/smey09/${repo}" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold">${repo}</a>
                         </li>
                     `).join('');
+
+                    // Add corresponding icon for each language
+                    let languageIcon = '';
+                    switch (language) {
+                        case 'Java':
+                            languageIcon = '<i class="fab fa-java text-2xl text-yellow-600"></i>';
+                            break;
+                        case 'Python':
+                            languageIcon = '<i class="fab fa-python text-2xl text-yellow-500"></i>';
+                            break;
+                        case 'JavaScript':
+                            languageIcon = '<i class="fab fa-js text-2xl text-yellow-500"></i>';
+                            break;
+                        case 'C++':
+                            languageIcon = '<i class="fab fa-cuttlefish text-2xl text-blue-600"></i>';
+                            break;
+                        case 'Ruby':
+                            languageIcon = '<i class="fas fa-gem text-2xl text-red-600"></i>';
+                            break;
+                        case 'PHP':
+                            languageIcon = '<i class="fab fa-php text-2xl text-blue-600"></i>';
+                            break;
+                        case 'Go':
+                            languageIcon = '<i class="fas fa-code text-2xl text-blue-500"></i>';
+                            break;
+                        case 'TypeScript':
+                            languageIcon = '<i class="fab fa-js-square text-2xl text-blue-700"></i>';
+                            break;
+                        case 'C#':
+                            languageIcon = '<i class="fas fa-cogs text-2xl text-gray-700"></i>';
+                            break;
+                        case 'HTML':
+                            languageIcon = '<i class="fab fa-html5 text-2xl text-orange-500"></i>';
+                            break;
+                        case 'CSS':
+                            languageIcon = '<i class="fab fa-css3-alt text-2xl text-blue-500"></i>';
+                            break;
+                        default:
+                            languageIcon = '<i class="fas fa-code text-2xl text-gray-600"></i>';
+                    }
+
                     languagesListDiv.innerHTML += `
                         <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">${language}</h3>
+                            <h3 class="flex items-center text-2xl font-semibold text-gray-800 mb-4">
+                                ${languageIcon} ${language}
+                            </h3>
                             <ul class="space-y-2">${repoList}</ul>
                         </div>
                     `;

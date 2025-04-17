@@ -8,17 +8,90 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Add Font Awesome CDN for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Tailwind configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #6366f1, #8b5cf6);
+        }
+        .repo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .language-icon {
+            transition: all 0.3s ease;
+        }
+        .language-card:hover .language-icon {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-sans text-gray-800 min-h-screen">
 
     <!-- Container for the page content -->
-    <div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="max-w-6xl mx-auto px-4 py-12">
 
         <!-- Title Section -->
-        <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">Explore My Repositories by Language</h2>
+        <div class="text-center mb-16 animate-fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">My Code Portfolio</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore my repositories organized by programming language</p>
+        </div>
 
         <!-- List of repositories categorized by language -->
-        <div id="languages-list" class="space-y-8"></div>
+        <div id="languages-list" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+
+        <!-- Loading indicator -->
+        <div id="loading" class="text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+            <p class="mt-4 text-gray-600">Loading repositories...</p>
+        </div>
 
     </div>
 
@@ -26,10 +99,38 @@
         // GitHub API URL for fetching public repositories of a user
         const apiUrl = 'https://api.github.com/users/smey09/repos?sort=created';
 
+        // Hide loading indicator when content is loaded
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // Show error message
+        function showError(message) {
+            hideLoading();
+            document.getElementById('languages-list').innerHTML = `
+                <div class="col-span-full bg-red-50 border-l-4 border-red-500 p-4 rounded shadow animate-fade-in">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-red-500 text-xl"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">${message}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         // Fetch repositories data from GitHub API
         fetch(apiUrl)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`GitHub API returned ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
+                hideLoading();
                 const languages = {};
 
                 // Loop through repositories and categorize by language
@@ -38,72 +139,129 @@
                         if (!languages[repo.language]) {
                             languages[repo.language] = [];
                         }
-                        languages[repo.language].push(repo.name);
+                        languages[repo.language].push({
+                            name: repo.name,
+                            description: repo.description || 'No description provided',
+                            stars: repo.stargazers_count,
+                            forks: repo.forks_count,
+                            updated: new Date(repo.updated_at).toLocaleDateString(),
+                            url: repo.html_url
+                        });
                     }
                 });
 
                 // Now build the dynamic list of repositories by language
                 const languagesListDiv = document.getElementById('languages-list');
-                for (let language in languages) {
-                    const repoList = languages[language].map(repo => `
-                        <li class="flex justify-between items-center py-2 px-4 border-b border-gray-200">
-                            <a href="https://github.com/smey09/${repo}" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold">${repo}</a>
+                
+                // Sort languages by number of repositories (descending)
+                const sortedLanguages = Object.keys(languages).sort((a, b) => {
+                    return languages[b].length - languages[a].length;
+                });
+
+                sortedLanguages.forEach((language, index) => {
+                    const repos = languages[language];
+                    
+                    // Add corresponding icon for each language
+                    let languageIcon = '';
+                    let iconColor = 'text-primary-600';
+                    
+                    switch (language) {
+                        case 'Java':
+                            languageIcon = 'fab fa-java';
+                            iconColor = 'text-red-600';
+                            break;
+                        case 'Python':
+                            languageIcon = 'fab fa-python';
+                            iconColor = 'text-blue-500';
+                            break;
+                        case 'JavaScript':
+                            languageIcon = 'fab fa-js';
+                            iconColor = 'text-yellow-500';
+                            break;
+                        case 'C++':
+                            languageIcon = 'fas fa-code';
+                            iconColor = 'text-blue-600';
+                            break;
+                        case 'Ruby':
+                            languageIcon = 'fas fa-gem';
+                            iconColor = 'text-red-500';
+                            break;
+                        case 'PHP':
+                            languageIcon = 'fab fa-php';
+                            iconColor = 'text-purple-600';
+                            break;
+                        case 'Go':
+                            languageIcon = 'fab fa-golang';
+                            iconColor = 'text-blue-600';
+                            break;
+                        case 'TypeScript':
+                            languageIcon = 'fab fa-js-square';
+                            iconColor = 'text-blue-700';
+                            break;
+                        case 'C#':
+                            languageIcon = 'fab fa-microsoft';
+                            iconColor = 'text-purple-700';
+                            break;
+                        case 'HTML':
+                            languageIcon = 'fab fa-html5';
+                            iconColor = 'text-orange-500';
+                            break;
+                        case 'CSS':
+                            languageIcon = 'fab fa-css3-alt';
+                            iconColor = 'text-blue-500';
+                            break;
+                        case 'Swift':
+                            languageIcon = 'fab fa-swift';
+                            iconColor = 'text-orange-600';
+                            break;
+                        case 'Kotlin':
+                            languageIcon = 'fas fa-mobile-alt';
+                            iconColor = 'text-purple-500';
+                            break;
+                        default:
+                            languageIcon = 'fas fa-code';
+                            iconColor = 'text-gray-600';
+                    }
+
+                    const repoList = repos.map(repo => `
+                        <li class="repo-card bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 animate-slide-up" style="animation-delay: ${index * 0.05}s">
+                            <a href="${repo.url}" target="_blank" class="block">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-semibold text-lg text-gray-800 hover:text-primary-600 transition-colors">${repo.name}</h4>
+                                        <p class="text-gray-600 text-sm mt-1">${repo.description}</p>
+                                    </div>
+                                    <span class="text-xs text-gray-500">${repo.updated}</span>
+                                </div>
+                                <div class="flex items-center mt-3 space-x-4 text-sm">
+                                    <span class="flex items-center text-gray-500">
+                                        <i class="fas fa-star mr-1 ${iconColor}"></i> ${repo.stars}
+                                    </span>
+                                    <span class="flex items-center text-gray-500">
+                                        <i class="fas fa-code-branch mr-1 ${iconColor}"></i> ${repo.forks}
+                                    </span>
+                                </div>
+                            </a>
                         </li>
                     `).join('');
 
-                    // Add corresponding icon for each language
-                    let languageIcon = '';
-                    switch (language) {
-                        case 'Java':
-                            languageIcon = '<i class="fab fa-java text-2xl text-yellow-600"></i>';
-                            break;
-                        case 'Python':
-                            languageIcon = '<i class="fab fa-python text-2xl text-yellow-500"></i>';
-                            break;
-                        case 'JavaScript':
-                            languageIcon = '<i class="fab fa-js text-2xl text-yellow-500"></i>';
-                            break;
-                        case 'C++':
-                            languageIcon = '<i class="fab fa-cuttlefish text-2xl text-blue-600"></i>';
-                            break;
-                        case 'Ruby':
-                            languageIcon = '<i class="fas fa-gem text-2xl text-red-600"></i>';
-                            break;
-                        case 'PHP':
-                            languageIcon = '<i class="fab fa-php text-2xl text-blue-600"></i>';
-                            break;
-                        case 'Go':
-                            languageIcon = '<i class="fas fa-code text-2xl text-blue-500"></i>';
-                            break;
-                        case 'TypeScript':
-                            languageIcon = '<i class="fab fa-js-square text-2xl text-blue-700"></i>';
-                            break;
-                        case 'C#':
-                            languageIcon = '<i class="fas fa-cogs text-2xl text-gray-700"></i>';
-                            break;
-                        case 'HTML':
-                            languageIcon = '<i class="fab fa-html5 text-2xl text-orange-500"></i>';
-                            break;
-                        case 'CSS':
-                            languageIcon = '<i class="fab fa-css3-alt text-2xl text-blue-500"></i>';
-                            break;
-                        default:
-                            languageIcon = '<i class="fas fa-code text-2xl text-gray-600"></i>';
-                    }
-
                     languagesListDiv.innerHTML += `
-                        <div class="bg-white shadow rounded-lg p-6">
-                            <h3 class="flex items-center text-2xl font-semibold text-gray-800 mb-4">
-                                ${languageIcon} ${language}
-                            </h3>
-                            <ul class="space-y-2">${repoList}</ul>
+                        <div class="language-card animate-fade-in" style="animation-delay: ${index * 0.1}s">
+                            <div class="sticky top-4 z-10 bg-white rounded-t-lg px-6 py-4 shadow-sm -mb-2 flex items-center">
+                                <i class="${languageIcon} ${iconColor} text-3xl mr-4 language-icon"></i>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">${language}</h3>
+                                    <p class="text-sm text-gray-500">${repos.length} ${repos.length === 1 ? 'repository' : 'repositories'}</p>
+                                </div>
+                            </div>
+                            <ul class="space-y-4">${repoList}</ul>
                         </div>
                     `;
-                }
+                });
             })
             .catch(error => {
+                showError(`Failed to load repositories: ${error.message}. Please try again later.`);
                 console.error('Error fetching data from GitHub API:', error);
-                document.getElementById('languages-list').innerHTML = '<p class="text-red-600">Failed to load repositories.</p>';
             });
     </script>
 

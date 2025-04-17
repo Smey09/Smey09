@@ -1,5 +1,19 @@
 # Hi 👋, I'm Smey
 
+Welcome to my GitHub profile! You can check out my personal website hosted on GitHub Pages here:
+
+[Visit My GitHub Pages Site](https://smey09.github.io/Smey09/)
+
+## About My Website
+
+My website is built using **GitHub Pages**, and it showcases my GitHub repositories categorized by programming language. It’s dynamic and automatically pulls in my repositories using GitHub’s API.
+
+You can find repositories for various languages, including:
+
+- [Java](https://github.com/smey09?tab=repositories&q=&type=public&language=java)
+- [Python](https://github.com/smey09?tab=repositories&q=&type=public&language=python)
+- [JavaScript](https://github.com/smey09?tab=repositories&q=&type=public&language=javascript)
+
 ## Connect with me:
 <div>
   <a href="mailto:roemreaksmey7@gmail.com" target="_blank">

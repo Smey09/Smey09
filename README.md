@@ -15,6 +15,8 @@ You can find repositories for various languages, including:
 - [Java](https://github.com/smey09?tab=repositories&q=&type=public&language=java)
 - [Python](https://github.com/smey09?tab=repositories&q=&type=public&language=python)
 - [JavaScript](https://github.com/smey09?tab=repositories&q=&type=public&language=javascript)
+- [TypeScript](https://github.com/smey09?tab=repositories&q=&type=public&language=typeScript)
+- [Dart](https://github.com/smey09?tab=repositories&q=&type=public&language=dart)
 
 ## Connect with me:
 <div>

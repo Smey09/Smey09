@@ -37,7 +37,7 @@ You can find repositories for various languages, including:
 
 ---
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=smey09&layout=compact&show_icons=true&locale=en&langs_count=10)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=smey09&layout=compact&show_icons=true&locale=en&langs_count=12)
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=smey09&show_icons=true&locale=en)
 ![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=smey09)
 

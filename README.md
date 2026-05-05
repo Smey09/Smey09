@@ -35,10 +35,3 @@ You can find repositories for various languages, including:
   <img alt="Profile view count" height="35" src="https://komarev.com/ghpvc/?username=smey09&color=1877F2&style=for-the-badge" />
 </div>
 
----
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=smey09&layout=compact&show_icons=true&locale=en&langs_count=12)
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=smey09&show_icons=true&locale=en)
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=smey09)
-
----
